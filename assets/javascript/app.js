@@ -16,8 +16,9 @@ $("#addEmployeeBtn").on("click", function(){
 	// Grabs user input
 	var empName = $("#employeeNameInput").val().trim();
 	var empRole = $("#roleInput").val().trim();
-	var empStart = moment($("#startInput").val().trim(), "DD/MM/YY").format("X");
+	var empStart = moment($("#startInput").val().trim(), "HHmm").format("X");
 	var empRate = $("#rateInput").val().trim();
+	
 
 	// Creates local "temporary" object for holding employee data
 	var newEmp = {
@@ -60,12 +61,13 @@ employeeData.on("child_added", function(childSnapshot, prevChildKey){
 	var empRole = childSnapshot.val().role;
 	var empStart = childSnapshot.val().start;
 	var empRate = childSnapshot.val().rate;
-
+	
 	// Employee Info
 	console.log(empName);
 	console.log(empRole);
 	console.log(empStart);
 	console.log(empRate);
+	
 
 	// Prettify the employee start
 	var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
@@ -77,10 +79,13 @@ employeeData.on("child_added", function(childSnapshot, prevChildKey){
 	// Calculate the total billed rate
 	var empBilled = empMonths * empRate;
 	console.log(empBilled);
-
+	var minutesAway = "calculation";
 	// Add each train's data into the table 
 	// #employeeTable > tbody is looking for the tbody in a table id employeeTable.
-	$("#employeeTable > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" + empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td></tr>");
+	$("#employeeTable > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" + empRate + "</td><td>" + empStart + "</td><td>" + minutesAway + "</td></tr>");
+
+	// $("#employeeTable > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" + empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td></tr>");
+
 
 });
 
